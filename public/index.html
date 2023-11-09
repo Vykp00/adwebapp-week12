@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Week 2</title>
+    <meta name="description" content="Roughly 155 characters">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--<link rel="stylesheet" type="text/css" href="./style.css" />-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <!--<script src="./index.js"></script>-->
+</head>
+
+<body>
+    <h1>Hello World</h1>
+    <!--Input field
+    Add an input field (textarea or input tag) with an id of input-text 
+    and a button with an id of submit-data to index.html. 
+    When pressing the button, the website should send the contents of the input field 
+    in a JSON object to the POST route "/list". 
+    The backend should save the text to a list and respond with the list of words.
+    -->
+    <input type="text" id="input-text">
+    <button type="submit" id="submit-data">Submit</button>
+    <!--Convert to JSON object-->
+    <script>
+        document.getElementById("submit-data").addEventListener("click", async () => {
+            const inputText = document.getElementById("input-text").value;
+            const response = await fetch("/list", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ text: inputText })
+            });
+
+            const result = await response.json();
+            console.log(result);
+
+        });
+    </script>
+</body>
+
+</html>
